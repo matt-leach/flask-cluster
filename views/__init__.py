@@ -1,5 +1,6 @@
 from app import app
 import settings
+from data import convert_csv
 
 from flask import render_template, jsonify, request
 import pandas as pd
@@ -8,7 +9,7 @@ import numpy as np
 
 @app.route('/')
 def home():
-    return render_template('home.html', methods = ['Spectral', 'K-Means'])
+    return render_template('home.html', methods=['Spectral', 'K-Means'])
 
 
 @app.route('/cluster')
@@ -20,8 +21,7 @@ def cluster():
 
     # TODO: error handling
 
-    X = pd.DataFrame(np.random.randn(10, 5),  # TODO
-                     columns=['a', 'b', 'c', 'd', 'e'])
+    X = convert_csv('static/cereal.csv')
 
     cluster_vals = method(X, num_clusters)
 
