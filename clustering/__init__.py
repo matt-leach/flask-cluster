@@ -1,4 +1,6 @@
 # Clustering file
+#edit, clustering functions
+
 
 
 def pca(X, num_clusters):
