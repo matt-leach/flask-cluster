@@ -2,6 +2,11 @@
 #edit, clustering functions
 
 
+#X will be pandas dataframe
+
+#output will be dict like this:
+#list=array
+
 
 def pca(X, num_clusters):
     '''
