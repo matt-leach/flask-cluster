@@ -6,7 +6,7 @@ GET /cluster
 
 parameters:
 * method string (kmeans, spectral, ) - method of clustering
-* data Boolean - determines whether to return the full dataset
+* data 0 or 1 or blank - determines whether to return the full dataset
 * clusters int - number of clusters
 
 returns json dictionary with key-value pairs:
