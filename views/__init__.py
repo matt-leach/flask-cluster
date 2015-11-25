@@ -15,9 +15,18 @@ def cluster():
                'spectral': spectral}
     method = methods[request.args.get('method')]
     num_clusters = int(request.args.get('clusters'))
-    data = bool(request.args.get('data'))
+    return_X_data = bool(request.args.get('data'))
 
     # TODO: error handling
+
+    X = []  # TODO
+
+    cluster_vals = method(X, num_clusters)
+    data = {'clusters': {num_clusters: cluster_vals}}
+    if return_X_data:
+        # TODO: convert data frame to dict of values
+        pass
+    # return jsonify(data)
 
     return jsonify({'clusters': {num_clusters: [1, 3, 2, 1, 1, 2, 2, 3, 1, 1]},
                     'variables': {'var1': [20, 40, 15, 25, 30, 10, 20, 35, 15, 20],
