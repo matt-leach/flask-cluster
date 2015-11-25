@@ -1,6 +1,5 @@
 # Clustering file
-#edit, clustering functions
-
+# edit, clustering functions
 
 #X will be pandas dataframe
 
