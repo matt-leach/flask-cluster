@@ -2,8 +2,38 @@
 
 {% block content %}
 
-  <p>Hello World!</p>
+<div class="page-wrap">
+	<div class="content">
+		<div class="header">
+			<h1><span id="arrow">></span> welcome to <span id="title">clustrfk</span><span class="blinking-cursor">|</span></h1>
+		</div>
+		<div class="application clearfix">
+			<div class="plotting-area"></div>
+			<div class="application-controls">
+				<select id="dataset-selector" >
+					<option>NBA Data</option>
+					<option>Cereal Data</option>
+					<option>House Price Data</option>
+				</select>
+				<select id="method-selector">
+					{% for method in methods %}
+						<option>{{method}}</option>
+					{% endfor %}
+				</select>
+				<div id="slider-handles"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<footer class="site-footer">
+	<div class="content">
+		<p>Copyright &copy; 2015 Alex, Matt &amp; Su. Powered by Python/Flask.</p>
+	</div>
+</footer>
 
-
+<script src="/static/nouislider.min.js"  type="text/javascript"></script>
+<script src="/static/d3.min.js" type="text/javascript"></script>
+<script src="/static/jquery-2.1.4.min.js" type="text/javascript"></script>
+<script src="/static/scripts.js"  type="text/javascript"></script>
 
 {% endblock %}

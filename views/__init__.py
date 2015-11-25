@@ -8,7 +8,7 @@ import numpy as np
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('home.html', methods = ['Spectral', 'K-Means'])
 
 
 @app.route('/cluster')

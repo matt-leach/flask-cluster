@@ -1,0 +1,154 @@
+body {
+	font-size: 10px;
+	background-color: #eee;
+	font-family: "acumin-pro";
+}
+
+/* fonts and headings */
+
+h1 {
+	font-family: "factoria";
+	font-weight: 400;
+	font-size: 3em;
+}
+
+h1 #title {
+	font-weight: 900;
+	margin-bottom: 1em;
+}
+
+h1 #arrow {
+	position: relative;
+	top:.1em;
+}
+
+p {
+	font-size: 1.2em;
+	font-weight: 300;
+}
+
+/* layout */
+
+
+.page-wrap {
+	min-height: 100%;
+	/* equal to footer height */
+	margin-bottom: -5em;
+}
+
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+
+.content {
+	margin: 0 auto;
+	max-width: 940px;
+	padding: 0 20px 0 20px;
+	height: 100%;
+}
+
+.application-area {
+}
+
+.header {
+	padding: 2em 0 2em 0;
+}
+
+.plotting-area {
+	width: 75%;
+	float: left;
+	height: 500px;
+	background: #fff;
+}
+
+.application-controls {
+	width: 25%;
+	float: left;
+	height: 500px;
+	background: #333;
+	box-sizing: border-box;
+	padding: 2.5%;
+}
+
+.application-controls select {
+	width: 100%;
+	margin-bottom: 1em;
+}
+
+
+.site-footer, .page-wrap:after {
+	margin: 0;
+	padding: 0;
+	height: 5em; 
+}
+
+.site-footer {
+  background: #333;
+  color: #ccc;
+  text-align: center;
+}
+
+.site-footer p {
+	text-align: center;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+/* other */
+
+	
+
+	/* plot */
+	
+		.main_plot .axis path, .main_plot .axis line, .main_plot .tick {
+			stroke: #ccc;
+		}
+		
+		.main_plot text {
+			font-family: "acumin-pro";
+		}
+		
+		.main_plot .tick text {
+			stroke: none;
+		}
+	
+		.main_plot .axis path, .main_plot .axis line {
+		  fill: none;
+		  stroke: #ccc;
+		  shape-rendering: auto;
+		}
+		
+		.main_plot .dot {
+		}
+		
+		.tooltip {
+		  position: absolute;
+		  width: 200px;
+		  height: 28px;
+		  pointer-events: none;
+		}
+
+	/* blinking cursor */
+		
+		.blinking-cursor {
+		  font-weight: 500;
+		  font-size: .9em;
+		  position: relative;
+		  bottom:.22em;
+		  margin-left: .2em;
+		  animation: 1s blink step-end infinite;
+		}
+		
+		@keyframes "blink" {
+		  from, to {
+		    color: transparent;
+		  }
+		  50% {
+		    color: black;
+		  }
+		}
+		
+		
+
