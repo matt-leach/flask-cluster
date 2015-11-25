@@ -59,14 +59,14 @@ p {
 .plotting-area {
 	padding: 2em;
 	box-sizing: border-box;
-	width: 75%;
-	float: left;
+	overflow: hidden;
 	background: #fff;
+	right: 30em;
 }
 
 .application-controls {
-	width: 25%;
-	float: left;
+	width: 200px;
+	float: right;
 	background: #333;
 	box-sizing: border-box;
 	padding: 2em;
@@ -75,6 +75,26 @@ p {
 .application-controls select {
 	width: 100%;
 	margin-bottom: 1em;
+}
+
+.application-controls #two-column-selector select {
+	width: 48%;
+	float:left;
+}
+
+.application-controls #two-column-selector select:nth-child(1) {
+	margin-right: 4%;
+}
+
+#canvas {
+	width: 100%;
+	height: 500px;
+}
+
+#slider-handle {
+	margin: 0 auto;
+	height: 75%;
+	margin-top: 3em;
 }
 
 

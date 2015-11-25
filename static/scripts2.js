@@ -1,16 +1,17 @@
+var slider = document.getElementById('slider-handle');
 
-var handlesSlider = document.getElementById('slider-handles');
-
-noUiSlider.create(handlesSlider, {
-    start: [0, 60],
+noUiSlider.create(slider, {
+    start: 4,
+    step: 1,
+	orientation: "vertical",
     range: {
         min: 0,
-        max: 60
+        max: 4
     },
-    margin: 3,
+    direction: 'rtl',
     pips: {
         mode: 'values',
-        values: [0, 15, 30, 45, 60],
+        values: [0, 1, 2, 3, 4],
         density: 1,
         stepped: true
     }
@@ -87,6 +88,7 @@ var randomScalingFactor = function() {
         dataset.pointBorderWidth = 1;
     });
 
+    console.log(scatterChartData);
 
     window.onload = function() {
         var ctx = document.getElementById("canvas").getContext("2d");
@@ -122,8 +124,58 @@ var randomScalingFactor = function() {
 	            }
 	        }
         });
-        
-        $('.application-controls').css('height', $('.plotting-area').innerHeight())
     };
 
+    $('#randomizeData').click(function() {
+        scatterChartData.datasets[0].data = [{
+			x: randomScalingFactor(),
+			y: randomScalingFactor(),
+		}, {
+			x: randomScalingFactor(),
+			y: randomScalingFactor(),
+		}, {
+			x: randomScalingFactor(),
+			y: randomScalingFactor(),
+		}, {
+			x: randomScalingFactor(),
+			y: randomScalingFactor(),
+		}, {
+			x: randomScalingFactor(),
+			y: randomScalingFactor(),
+		}, {
+			x: randomScalingFactor(),
+			y: randomScalingFactor(),
+		}, {
+			x: randomScalingFactor(),
+			y: randomScalingFactor(),
+		}];
+        scatterChartData.datasets[1].data = [{
+			x: randomScalingFactor(),
+			y: randomScalingFactor(),
+		}, {
+			x: randomScalingFactor(),
+			y: randomScalingFactor(),
+		}, {
+			x: randomScalingFactor(),
+			y: randomScalingFactor(),
+		}, {
+			x: randomScalingFactor(),
+			y: randomScalingFactor(),
+		}, {
+			x: randomScalingFactor(),
+			y: randomScalingFactor(),
+		}, {
+			x: randomScalingFactor(),
+			y: randomScalingFactor(),
+		}, {
+			x: randomScalingFactor(),
+			y: randomScalingFactor(),
+		}]
+        window.myScatter.update();
+    });
 
+
+
+window.onload = function() {    
+    $('.application-controls').css('height', $('.plotting-area').innerHeight())
+};
