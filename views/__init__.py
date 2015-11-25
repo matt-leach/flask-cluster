@@ -1,5 +1,5 @@
 from app import app
-from clustering import pca, kmeans, hierarchical, spectral
+import settings
 
 from flask import render_template, jsonify, request
 
@@ -11,9 +11,8 @@ def home():
 
 @app.route('/cluster')
 def cluster():
-    methods = {'pca': pca, 'kmeans': kmeans, 'hierarchical': hierarchical,
-               'spectral': spectral}
-    method = methods[request.args.get('method')]
+    method_name = request.args.get('method')
+    method = settings.CLUSTER_METHODS[method_name]
     num_clusters = int(request.args.get('clusters'))
     return_X_data = bool(request.args.get('data'))
 
@@ -30,4 +29,5 @@ def cluster():
 
     return jsonify({'clusters': {num_clusters: [1, 3, 2, 1, 1, 2, 2, 3, 1, 1]},
                     'variables': {'var1': [20, 40, 15, 25, 30, 10, 20, 35, 15, 20],
-                                  'var2': [5, 10, 0, 7, 8, 7, 3, 5, 10, 12]}})
+                                  'var2': [5, 10, 0, 7, 8, 7, 3, 5, 10, 12]},
+                    'method': method_name})
