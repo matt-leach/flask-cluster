@@ -23,7 +23,7 @@ def kmeans(X, num_clusters):
     return []
 
 
-def hiearchicalr(X, num_clusters):
+def hierarchical(X, num_clusters):
     '''
     Hierarchical Clustering on X for response y
     Returns array of cluster groups
