@@ -5,6 +5,8 @@
 
 #output will be dict like this:
 #list=array
+from sklearn.cluster import KMeans
+
 
 
 def pca(X, num_clusters):
@@ -20,7 +22,10 @@ def kmeans(X, num_clusters):
     K-Means on X for response y
     Returns array of cluster groups
     '''
-    return []
+    model = KMeans(n_clusters=num_clusters)
+    model.fit(X.as_matrix())
+
+    return model.labels_
 
 
 def hierarchical(X, num_clusters):
