@@ -34,6 +34,7 @@ p {
 	min-height: 100%;
 	/* equal to footer height */
 	margin-bottom: -5em;
+	position: relative;
 }
 
 .page-wrap:after {
@@ -46,6 +47,10 @@ p {
 	max-width: 940px;
 	padding: 0 20px 0 20px;
 	height: 100%;
+}
+
+.content#application-frame {
+	position: relative;
 }
 
 .application {
