@@ -48,7 +48,8 @@ p {
 	height: 100%;
 }
 
-.application-area {
+.application {
+	margin-bottom: 2em;
 }
 
 .header {
@@ -56,19 +57,19 @@ p {
 }
 
 .plotting-area {
+	padding: 2em;
+	box-sizing: border-box;
 	width: 75%;
 	float: left;
-	height: 500px;
 	background: #fff;
 }
 
 .application-controls {
 	width: 25%;
 	float: left;
-	height: 500px;
 	background: #333;
 	box-sizing: border-box;
-	padding: 2.5%;
+	padding: 2em;
 }
 
 .application-controls select {
