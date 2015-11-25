@@ -4,7 +4,7 @@
 
 def pca(X, num_clusters):
     '''
-    Principal Component Analysis on X for response y
+    Principal Component Analysis on X
     Returns array of cluster groups
     '''
     return []
