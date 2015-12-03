@@ -119,7 +119,7 @@ function refactorData(data, cluster_num) {
         data.push({x: Data["Sodium"][jj], y: Data["Calories"][jj], name: 'a_point'});
       }
     }
-    cluster_dict = {name: 'Data'+ c, color: randomColor(), data: data};
+    cluster_dict = {name: 'Cluster '+c, color: randomColor(), data: data, marker: {symbol: 'circle'}};
     chart_data.push(cluster_dict);
   }
   var bubbleChartData = chart_data;
@@ -156,7 +156,7 @@ function plotData(bubbleChartData){
 	      gridLineColor: '#eee',
           title: {
               text: 'Variable 2'
-          }         
+          }
       },
       plotOptions: {
           scatter: {
@@ -188,5 +188,5 @@ function plotData(bubbleChartData){
   updateLegend(window.myChart)
 
   resizeApplicationControls()
- 
+
 }
