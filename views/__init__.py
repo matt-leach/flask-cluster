@@ -41,6 +41,7 @@ def cluster():
         X = pd.read_json(session['data'])
     cluster_vals = method(X, num_clusters)
 
+    # TODO: check numpy array and cast to list if needed
     data = {'clusters': {num_clusters: cluster_vals.tolist()}}
     if return_X_data:
         data['variables'] = {var: X[var].tolist() for var in X}
