@@ -164,7 +164,7 @@ function plotData(bubbleChartData){
                   }
               },
               tooltip: {
-                  headerFormat: '<b>{series.name}</b><br>',
+                  headerFormat: '',
                   pointFormat: '{point.name}'
               }
           }

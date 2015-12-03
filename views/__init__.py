@@ -52,7 +52,7 @@ def cluster():
 def load_data():
     session['data'] = None
     try:
-        file_name = json.loads(request.data)['builtin']
+        file_name = dict(request.form)['builtin'][0]
     except Exception as e:
         print e
         file_name = None
