@@ -124,4 +124,7 @@ function plotData(bubbleChartData){
           responsive: true,
       }
   });
+  updateLegend();
+
+  resizeApplicationControls()
 }
