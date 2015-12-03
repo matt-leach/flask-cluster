@@ -13,7 +13,7 @@ from sklearn.cluster import SpectralClustering
 def pca(X, num_clusters):
     '''
     Principal Component Analysis on X
-    Returns array of cluster groups
+    Returns numpy array of cluster groups
     '''
     return []
 
