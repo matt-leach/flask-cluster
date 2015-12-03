@@ -43,7 +43,7 @@ var randomColor = function() {
 
 function resizeApplicationControls() {
 	$('.plotting-area').css('height', $('#canvas').outerHeight() + 80)
-	
+
 	if ($(window).width() > 768) {
 		$('.application-controls').css('height', $('.plotting-area').innerHeight())
 	} else {
@@ -51,34 +51,30 @@ function resizeApplicationControls() {
 	}
 }
 
-function updateLegend() {
+function updateLegend(chart) {
     $legendContainer = $('#legendContainer');
     $legendContainer.empty();
     $legendContainer.append(window.myChart.generateLegend());
 }
 
 window.onload = function() {
-	getData('kmeans', 3)
+	getData('kmeans', 3);
 
-    updateLegend();
+	resizeApplicationControls();
+};
 
-	resizeApplicationControls()
-	
-	
 	$('.info-button').click(function(event) {
 		div_to_show = $(this).attr("show_div")
 		console.log(div_to_show)
 		$(div_to_show).fadeIn()
 		$("#dimmer").fadeIn()
 	})
-	
+
 	$('.info i').click(function() {
 		$('.info-text-wrapper').fadeOut()
 		$("#dimmer").fadeOut()
 	})
 
-
-};
 
 
 $(window).resize(function() {
@@ -128,7 +124,7 @@ function plotData(bubbleChartData){
           responsive: true,
       }
   });
-  updateLegend();
+  updateLegend(window.myChart)
 
   resizeApplicationControls()
 }
