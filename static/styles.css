@@ -183,6 +183,7 @@ p {
 	top:1em;
 	font-size: 1.5em;
 	right: 1em;
+	cursor: pointer;
 }
 
 .info h1 {

@@ -2,6 +2,7 @@ var sliderVert = document.getElementById('slider-handle-vert');
 var sliderHoriz = document.getElementById('slider-handle-horiz');
 
 noUiSlider.create(sliderVert, {
+	animate: false,
     start: 4,
     step: 1,
 	orientation: "vertical",
@@ -17,19 +18,31 @@ noUiSlider.create(sliderVert, {
 });
 
 noUiSlider.create(sliderHoriz, {
+	animate: false,
     start: 4,
     step: 1,
     range: {
         min: 0,
-        max: 4
+        max: 50
     },
     pips: {
-        mode: 'values',
-        values: [0,1, 2, 3, 4],
-        density: 40,
-        stepped: true
+		mode: 'range',
+		density: 1
     }
 });
+
+function crossUpdate ( value, slider ) {
+	slider.noUiSlider.set(value);
+}
+
+sliderHoriz.noUiSlider.on('slide', function( values, handle ){
+	sliderVert.noUiSlider.set(values[handle]);
+});
+
+sliderVert.noUiSlider.on('slide', function( values, handle ){
+	sliderHoriz.noUiSlider.set(values[handle]);
+});
+
 
 var randomScalingFactor = function() {
     return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
