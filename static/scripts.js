@@ -67,27 +67,25 @@ function resizeApplicationControls() {
 function updateLegend(chart) {
     $legendContainer = $('#legendContainer');
     $legendContainer.empty();
-    $legendContainer.append(window.myChart.generateLegend());
+    // $legendContainer.append(window.myChart.generateLegend());
 }
 
 window.onload = function() {
 	getData('kmeans', 3);
-
 	resizeApplicationControls();
 };
 
-	$('.info-button').click(function(event) {
-		div_to_show = $(this).attr("show_div")
-		console.log(div_to_show)
-		$(div_to_show).fadeIn()
-		$("#dimmer").fadeIn()
-	})
+$('.info-button').click(function(event) {
+	div_to_show = $(this).attr("show_div")
+	console.log(div_to_show)
+	$(div_to_show).fadeIn()
+	$("#dimmer").fadeIn()
+})
 
-	$('.info i').click(function() {
-		$('.info-text-wrapper').fadeOut()
-		$("#dimmer").fadeOut()
-	})
-
+$('.info i').click(function() {
+	$('.info-text-wrapper').fadeOut()
+	$("#dimmer").fadeOut()
+})
 
 
 $(window).resize(function() {
@@ -113,30 +111,77 @@ function refactorData(data, cluster_num) {
     for (jj = 0; jj <= clusters[cluster_num].length; jj++ ) {
       if (clusters[cluster_num][jj] == c) {
         console.log('ok');
-        data.push({x: Data["Sodium"][jj], y: Data["Calories"][jj], r: 5});
+        data.push({x: Data["Sodium"][jj], y: Data["Calories"][jj], name: 'a_point'});
       }
     }
-    cluster_dict = {label: 'Data'+ c, backgroundColor: randomColor(), data: data};
+    cluster_dict = {name: 'Data'+ c, color: randomColor(), data: data};
     chart_data.push(cluster_dict);
   }
-  var bubbleChartData = {
-      animation: {
-          duration: 10000
-      },
-      datasets: chart_data};
-
+  var bubbleChartData = chart_data;
+  console.log('ok')
   plotData(bubbleChartData)
 }
 
 function plotData(bubbleChartData){
-  var ctx = document.getElementById("canvas").getContext("2d");
-  window.myChart = new Chart(ctx, {
-      type: 'bubble',
-      data: bubbleChartData,
-      options: {
-          responsive: true,
-      }
+  console.log(bubbleChartData);
+
+  $('#canvas').highcharts({
+      chart: {
+          type: 'scatter',
+          zoomType: 'xy'
+      },
+      title: { text: '' },
+      xAxis: {
+          title: {
+              enabled: true,
+              text: 'Variable 1'
+          },
+          startOnTick: true,
+          endOnTick: true,
+          showLastLabel: true
+      },
+      yAxis: {
+          title: {
+              text: 'Variable 2'
+          }
+      },
+      legend: {
+          layout: 'vertical',
+          align: 'left',
+          verticalAlign: 'top',
+          x: 100,
+          y: 70,
+          floating: true,
+          backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
+          borderWidth: 1
+      },
+      plotOptions: {
+          scatter: {
+              marker: {
+                  radius: 5,
+                  states: {
+                      hover: {
+                          enabled: true,
+                          lineColor: 'rgb(100,100,100)'
+                      }
+                  }
+              },
+              states: {
+                  hover: {
+                      marker: {
+                          enabled: false
+                      }
+                  }
+              },
+              tooltip: {
+                  headerFormat: '<b>{series.name}</b><br>',
+                  pointFormat: '{point.name}'
+              }
+          }
+      },
+      series: bubbleChartData
   });
+
   updateLegend(window.myChart)
 
   resizeApplicationControls()
