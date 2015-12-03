@@ -1,4 +1,5 @@
 import pandas as pd
+from StringIO import StringIO
 
 
 def convert_csv(filename):
@@ -6,4 +7,9 @@ def convert_csv(filename):
     with file(filename) as f:
         data = pd.read_csv(filename)
 
+    return data._get_numeric_data()
+
+
+def convert_str(data_str):
+    data = pd.read_csv(StringIO(data_str))
     return data._get_numeric_data()

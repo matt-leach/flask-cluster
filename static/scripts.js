@@ -41,111 +41,6 @@ var randomColor = function() {
     return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',.7)';
 };
 
-var bubbleChartData = {
-    animation: {
-        duration: 10000
-    },
-    
-    datasets: [{
-        label: "My Second dataset",
-        backgroundColor: randomColor(),
-        data: [{
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 5,
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 5,
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 5,
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 5,
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 5,
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 5,
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 5,
-        }]
-    }, {
-        label: "My Second dataset",
-        backgroundColor: randomColor(),
-        data: [{
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 5,
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 5,
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 5,
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 5,
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 5,
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 5,
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 5,
-        }]
-    }, {
-        label: "My Second dataset",
-        backgroundColor: randomColor(),
-        data: [{
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 5,
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 5,
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 5,
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 5,
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 5,
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 5,
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 5,
-        }]
-    }]
-
-};
-
 function resizeApplicationControls() {
 	$('.plotting-area').css('height', $('#canvas').outerHeight() + 80)
 	
@@ -163,17 +58,10 @@ function updateLegend() {
 }
 
 window.onload = function() {
-    var ctx = document.getElementById("canvas").getContext("2d");
-    window.myChart = new Chart(ctx, {
-        type: 'bubble',
-        data: bubbleChartData,
-        options: {
-            responsive: true,
-        }
-    });
+	getData('kmeans', 3)
 
     updateLegend();
-	
+
 	resizeApplicationControls()
 	
 	
@@ -188,7 +76,7 @@ window.onload = function() {
 		$('.info-text-wrapper').fadeOut()
 		$("#dimmer").fadeOut()
 	})
-	
+
 
 };
 
@@ -198,5 +86,46 @@ $(window).resize(function() {
 })
 
 
+function getData(method, cluster_num) {
+  data = 1
+  $.get( "cluster?method="+method+"&clusters="+cluster_num+"&data="+data, function(response) {
+    if (response.error) { return }  // Error
+    refactorData(response, cluster_num);
+  });
+}
 
+function refactorData(data, cluster_num) {
+  clusters = data.clusters;
+  Data = data.variables;  // Global
 
+  chart_data = [];
+  for (c = 0; c <= cluster_num; c++ ) {
+    data = [];
+    for (jj = 0; jj <= clusters[cluster_num].length; jj++ ) {
+      if (clusters[cluster_num][jj] == c) {
+        console.log('ok');
+        data.push({x: Data["Sodium"][jj], y: Data["Calories"][jj], r: 5});
+      }
+    }
+    cluster_dict = {label: 'Data'+ c, backgroundColor: randomColor(), data: data};
+    chart_data.push(cluster_dict);
+  }
+  var bubbleChartData = {
+      animation: {
+          duration: 10000
+      },
+      datasets: chart_data};
+
+  plotData(bubbleChartData)
+}
+
+function plotData(bubbleChartData){
+  var ctx = document.getElementById("canvas").getContext("2d");
+  window.myChart = new Chart(ctx, {
+      type: 'bubble',
+      data: bubbleChartData,
+      options: {
+          responsive: true,
+      }
+  });
+}
