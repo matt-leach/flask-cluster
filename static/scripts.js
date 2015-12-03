@@ -93,6 +93,12 @@ $(window).resize(function() {
 })
 
 
+
+$('.add-data-button').click(function(event) {
+  $("#file1").click();
+})
+
+
 function getData(method, cluster_num) {
   data = 1
   $.get( "cluster?method="+method+"&clusters="+cluster_num+"&data="+data, function(response) {
@@ -110,7 +116,6 @@ function refactorData(data, cluster_num) {
     data = [];
     for (jj = 0; jj <= clusters[cluster_num].length; jj++ ) {
       if (clusters[cluster_num][jj] == c) {
-        console.log('ok');
         data.push({x: Data["Sodium"][jj], y: Data["Calories"][jj], name: 'a_point'});
       }
     }
@@ -118,20 +123,26 @@ function refactorData(data, cluster_num) {
     chart_data.push(cluster_dict);
   }
   var bubbleChartData = chart_data;
-  console.log('ok')
   plotData(bubbleChartData)
 }
 
 function plotData(bubbleChartData){
-  console.log(bubbleChartData);
 
   $('#canvas').highcharts({
       chart: {
           type: 'scatter',
-          zoomType: 'xy'
+          zoomType: 'xy',
+          spacingTop: 0,
+          spacingBottom: 0,
+          spacingLeft: 0,
+          style: {
+          fontFamily: 'Proxima Nova'
+        }
       },
-      title: { text: '' },
+      title: { text: 'NBA Data' },
       xAxis: {
+	      lineColor: '#eee',
+	      tickColor: '#eee',
           title: {
               enabled: true,
               text: 'Variable 1'
@@ -139,11 +150,13 @@ function plotData(bubbleChartData){
           startOnTick: true,
           endOnTick: true,
           showLastLabel: true
-      },
+        },
       yAxis: {
+	      lineColor: '#333',
+	      gridLineColor: '#eee',
           title: {
               text: 'Variable 2'
-          }
+          }         
       },
       plotOptions: {
           scatter: {
@@ -175,4 +188,5 @@ function plotData(bubbleChartData){
   updateLegend(window.myChart)
 
   resizeApplicationControls()
+ 
 }

@@ -200,6 +200,10 @@ p {
 	cursor: pointer;
 }
 
+.add-data-button {
+	cursor: pointer;
+}
+
 #canvas {
 	width: 100%;
 	position: relative;
@@ -302,33 +306,30 @@ p {
 
 	/* plot */
 	
-		.main_plot .axis path, .main_plot .axis line, .main_plot .tick {
-			stroke: #ccc;
-		}
-		
-		.main_plot text {
-			font-family: "acumin-pro";
-		}
-		
-		.main_plot .tick text {
-			stroke: none;
-		}
+	.highcharts-contextmenu {
+	}
 	
-		.main_plot .axis path, .main_plot .axis line {
-		  fill: none;
-		  stroke: #ccc;
-		  shape-rendering: auto;
-		}
-		
-		.main_plot .dot {
-		}
-		
-		.tooltip {
-		  position: absolute;
-		  width: 200px;
-		  height: 28px;
-		  pointer-events: none;
-		}
+	.highcharts-contextmenu > div {
+		box-shadow: none !important;
+		-webkit-box-shadow:none !important;
+		border: none !important;
+		border: 1px solid #eee !important;
+		margin-top: 5px !important;
+		padding: 0 !important;
+	}
+	
+	.highcharts-contextmenu > div > div {
+		padding:1em !important;
+	}
+	
+	.highcharts-contextmenu > div > div:hover {
+		background: #eee !important;
+		color: #000 !important;
+	}
+
+	.highcharts-contextmenu hr {
+		display: none !important;
+	}
 
 	/* blinking cursor */
 		
