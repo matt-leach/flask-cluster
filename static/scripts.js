@@ -7,14 +7,12 @@ noUiSlider.create(sliderVert, {
 	orientation: "vertical",
     range: {
         min: 0,
-        max: 4
+        max: 50
     },
     direction: 'rtl',
     pips: {
-        mode: 'values',
-        values: [0,1, 2, 3, 4],
-        density: 40,
-        stepped: true
+		mode: 'range',
+		density: 1
     }
 });
 
@@ -43,9 +41,10 @@ var randomColor = function() {
     return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',.7)';
 };
 
-
 function resizeApplicationControls() {
-	if ($(window).width() > 600) {
+	$('.plotting-area').css('height', $('#canvas').outerHeight() + 80)
+	
+	if ($(window).width() > 768) {
 		$('.application-controls').css('height', $('.plotting-area').innerHeight())
 	} else {
 		$('.application-controls').css('height', 'auto')
@@ -59,20 +58,25 @@ function updateLegend() {
 }
 
 window.onload = function() {
-  getData('kmeans', 3)
-    /*var ctx = document.getElementById("canvas").getContext("2d");
-    window.myChart = new Chart(ctx, {
-        type: 'bubble',
-        data: bubbleChartData,
-        options: {
-            responsive: true,
-        }
-    });
+	getData('kmeans', 3)
 
     updateLegend();
 
 	resizeApplicationControls()
-*/
+	
+	
+	$('.info-button').click(function(event) {
+		div_to_show = $(this).attr("show_div")
+		console.log(div_to_show)
+		$(div_to_show).fadeIn()
+		$("#dimmer").fadeIn()
+	})
+	
+	$('.info i').click(function() {
+		$('.info-text-wrapper').fadeOut()
+		$("#dimmer").fadeOut()
+	})
+
 
 };
 

@@ -5,21 +5,50 @@
 <div class="page-wrap">
 	<div class="content" id="application-frame">
 		<div class="header">
-			<h1><span id="arrow">></span> welcome to <span id="title">clustrfk</span><span class="blinking-cursor">|</span></h1>
+			<h1><span id="arrow">></span> welcome to <span id="title">clustr.fk</span><span class="blinking-cursor">|</span></h1>
 		</div>
 		<div class="application clearfix">
+			<div class= "info-text-wrapper" id="data-info-wrapper">
+				<div class="info">
+					<i class="fa fa-close"></i>
+					<h1>NBA Data</h1>
+						<p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Curabitur blandit tempus porttitor. Curabitur blandit tempus porttitor.</p>
+						<p>Nulla vitae elit libero, a pharetra augue. Etiam porta sem malesuada magna mollis euismod. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Curabitur blandit tempus porttitor. Donec sed odio dui. Donec sed odio dui.</p>
+				</div>
+			</div>
+			<div class= "info-text-wrapper" id="clustering-info-wrapper">
+				<div class="info">
+					<i class="fa fa-close"></i>
+					<h1>K-Means Clustering</h1>
+						<p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Curabitur blandit tempus porttitor. Curabitur blandit tempus porttitor.</p>
+						<p>Nulla vitae elit libero, a pharetra augue. Etiam porta sem malesuada magna mollis euismod. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Curabitur blandit tempus porttitor. Donec sed odio dui. Donec sed odio dui.</p>
+				</div>
+			</div>
+			<div id="dimmer">
+				
+			</div>
 			<div class="application-controls">
 				<div id="selectors">
-					<select id="dataset-selector" >
-						<option>NBA Data</option>
-						<option>Cereal Data</option>
-						<option>House Price Data</option>
-					</select>
-					<select id="method-selector">
-						{% for method in methods %}
-							<option>{{method}}</option>
-						{% endfor %}
-					</select>
+					<div class="selector-wrapper clearfix">
+						<select id="dataset-selector" >
+							<option>NBA Data</option>
+							<option>Cereal Data</option>
+							<option>House Price Data</option>
+						</select>
+						<div class="info-wrapper">
+							<i show_div="#data-info-wrapper" class="fa fa-info-circle info-button"></i>
+						</div>					
+					</div>
+					<div class="selector-wrapper clearfix">
+						<select id="method-selector">
+							{% for method in methods %}
+								<option>{{method}}</option>
+							{% endfor %}
+						</select>
+						<div class="info-wrapper">
+							<i show_div="#clustering-info-wrapper" class="fa fa-info-circle info-button"></i>
+						</div>
+					</div>
 					<div id="two-column-selector" class="clearfix">
 						<select id="var1-selector" >
 							<option>Var 2</option>
@@ -36,10 +65,13 @@
 				<div id="slider-container">
 					<div id="slider-handle-vert"></div>
 					<div id="slider-handle-horiz"></div>
+					<p id="slider-label" class="slider-label">Total Clusters</p>
 				</div>
 			</div>
 			<div class="plotting-area">
 				<canvas id="canvas" height="200"></canvas>
+				<p id="plot-x-label" class="plot-label">X Axis Label</p>
+				<p id="plot-y-label" class="plot-label">Y Axis Label</p>
 			</div>
 
 		</div>

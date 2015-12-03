@@ -1,7 +1,7 @@
 body {
 	font-size: 10px;
 	background-color: #eee;
-	font-family: "acumin-pro" sans-serif;
+	font-family: "Proxima Nova" sans-serif;
 }
 
 /* fonts and headings */
@@ -55,6 +55,7 @@ p {
 
 .application {
 	margin-bottom: 2em;
+	position: relative;
 }
 
 .header {
@@ -62,13 +63,13 @@ p {
 }
 
 .plotting-area {
-	padding: 2em;
+	padding: 2.5em;
 	box-sizing: border-box;
 	overflow: hidden;
 	background: #fff;
-	right: 30em;
 	height: 500px;
 	border-top-left-radius: 5px;
+	position: relative;
 	border-bottom-left-radius: 5px;
 }
 
@@ -81,6 +82,34 @@ p {
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
 
+}
+
+.plot-label, .slider-label {
+	position: absolute;
+/* 	top: 50%; */
+/* 	transform: translateY(-50%); */
+}
+
+.slider-label {
+	transform: rotate(-90deg);
+	left: 1em;
+	top:40%;
+	color: #fff;
+	font-size: 1.2em;
+	color: #999;
+}
+
+#plot-y-label {
+	transform: rotate(-90deg);
+	left: -1em;
+	top:45%;
+/* 	transform: translateY(-50%); */
+	
+}
+
+#plot-x-label {
+	left:48%;
+	bottom:1em;
 }
 
 .application-controls select {
@@ -97,6 +126,79 @@ p {
 	margin-right: 4%;
 }
 
+.selector-wrapper {
+	white-space: nowrap; 
+}
+
+.selector-wrapper select {
+	width: 90%;
+	display: inline-block;
+}
+
+.selector-wrapper .info-wrapper {
+	overflow: hidden;
+	text-align: center;
+	display: inline-block;
+	color: white;
+	margin-left: .25em;
+	font-size: 1.5em;
+	opacity: 0.75;
+}
+
+#dimmer {
+	width: 100%;
+	display: none;
+	height: 100%;
+	position: absolute;
+	z-index: 100;
+	border-radius: 5px;
+	background: rgba(0, 0, 0, 0.4);
+}
+
+
+.info-text-wrapper {
+	position: absolute;
+	display: none;
+	top:0;
+	left:0;
+	z-index: 1001;
+	width: 100%;
+	margin: 0 auto;
+	color: black;
+	top:45%;
+	transform: translateY(-50%);
+}
+
+.info {
+	width: 80%;
+	position: relative;
+	margin: 0 auto;
+	background:white;
+	padding: 5em;
+	border-radius: 5px;
+}
+
+.info i {
+	position: absolute;
+	top:1em;
+	font-size: 1.5em;
+	right: 1em;
+}
+
+.info h1 {
+	margin-bottom: .25em;
+}
+
+.info p {
+	margin-bottom: 1em;
+	font-size: 1.4em;
+	line-height: 1.5;
+}
+
+.info-button {
+	cursor: pointer;
+}
+
 #canvas {
 	width: 100%;
 	position: relative;
@@ -109,10 +211,11 @@ p {
 	width: 100%;
 	height: 75%;
 	margin-top: 3em;
+	position:relative;
 }
 
 #slider-handle-vert {
-	height: 100%;
+	height: 95%;
 	margin: 0 auto;
 }
 
@@ -120,28 +223,33 @@ p {
 	display: none;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+	
+	.application {
+		display: flex;
+		flex-direction: column-reverse;
+	}
 	
 	.application-controls {
 		width:100%;
-		border-top-right-radius: 5px;
-		border-bottom-right-radius: 0px;
-		border-top-left-radius: 5px;
+		border-top-right-radius: 0px;
+		border-bottom-right-radius: 5px;
+		border-bottom-left-radius: 5px;
+			display: flex;
 		
 	}
 	
 	.plotting-area {
 		height: 400px;
-		border-bottom-right-radius: 5px;
-		border-bottom-left-radius: 5px;
-		border-top-left-radius: 0px;
+		border-bottom-right-radius: 0px;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
 	}
 	
 	#slider-container {
 		display: block;
 		margin-top: 0;
-		overflow: hidden;
-		width: auto;
+		width: 100%;
 		padding: 2em;
 	}
 	
@@ -154,9 +262,15 @@ p {
 	}
 	
 	#selectors {
-		width: 13em;
-		float:left;
+		width: 20em;
 		margin-right: 1.5em;
+	}
+
+	.slider-label {
+		transform: rotate(0deg);
+		left: 40%;
+		top:-.3em;
+		font-size: 1.2em;
 	}
 
 
