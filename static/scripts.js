@@ -73,10 +73,12 @@ function updateLegend(chart) {
 }
 
 window.onload = function() {
+	current_clusters = sliderVert.noUiSlider.get()
+	
   Run();
-	getData('kmeans', 6);
-	resizeApplicationControls();
-	Run();
+  getData('kmeans', current_clusters);
+  resizeApplicationControls();
+  updateClusters(current_clusters)
 };
 
 
@@ -144,18 +146,19 @@ $('#method-selector').change(function() {
 })
 
 
-sliderVert.noUiSlider.on('change', function( values, handle){
+function updateClusters(x) {
+	clusters = parseInt(x)
 	method = $('#method-selector').val()
-	console.log(method)
-	console.log(parseInt(values[handle]))
-	getData(method, parseInt(values[handle]))
+	$(".no-of-clusters").html(clusters)
+	getData(method, clusters)
+}
+
+sliderVert.noUiSlider.on('change', function( values, handle){
+	updateClusters(values[handle])
 });
 
 sliderHoriz.noUiSlider.on('change', function( values, handle){
-	method = $('#method-selector').val()
-	console.log(method)
-	console.log(parseInt(values[handle]))
-	getData(method, parseInt(values[handle]))
+	updateClusters(values[handle])
 });
 
 
@@ -169,20 +172,22 @@ function getData(method, cluster_num) {
   });
 }
 
+colors = ['rgba(95, 75, 182, 100)','rgba(13, 50, 77, 100)','rgba(168, 224, 255, 100)','rgba(84, 122, 165, 100)','rgba(247, 111, 142, 100)']
+
 function refactorData(data, cluster_num) {
   clusters = data.clusters;
   Data = data.variables;  // Global
   names = data.names;
 
   chart_data = [];
-  for (c = 0; c <= cluster_num; c++ ) {
+  for (c = 0; c < cluster_num; c++ ) {
     data = [];
     for (jj = 0; jj <= clusters[cluster_num].length; jj++ ) {
       if (clusters[cluster_num][jj] == c) {
         data.push({x: Data[$("#var1-selector").val()][jj], y: Data[$("#var2-selector").val()][jj], name: names[jj]});
       }
     }
-    cluster_dict = {name: 'Cluster '+c, color: randomColor(), data: data, marker: {symbol: 'circle'}};
+    cluster_dict = {name: 'Cluster '+ (c+1), color: colors[c], data: data, marker: {symbol: 'circle'}};
     chart_data.push(cluster_dict);
   }
   var bubbleChartData = chart_data;
