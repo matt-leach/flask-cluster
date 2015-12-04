@@ -11,5 +11,5 @@ def convert_csv(filename):
 
 
 def convert_str(data_str):
-    data = pd.read_csv(StringIO(data_str))
+    data = pd.read_csv(data_str)
     return data._get_numeric_data()

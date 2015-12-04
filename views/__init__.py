@@ -15,6 +15,7 @@ def home():
 
 @app.route('/cluster')
 def cluster():
+    print session['data']
     try:
         method_name = request.args.get('method')
         method = settings.CLUSTER_METHODS[method_name]
@@ -50,7 +51,6 @@ def cluster():
 
 @app.route('/data', methods=['POST'])
 def load_data():
-    session['data'] = None
     try:
         file_name = dict(request.form)['builtin'][0]
     except Exception as e:
@@ -63,6 +63,5 @@ def load_data():
             return jsonify({'error': "No built in data file '{}'.".format(file_name)})
     else:
         # TODO: check works with javascript shizzle
-        session['data'] = convert_str(request.data).to_json()
-
+        session['data'] = convert_str(dict(request.files)['file'][0]).to_json()
     return ""
