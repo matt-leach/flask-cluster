@@ -7,7 +7,7 @@ noUiSlider.create(sliderVert, {
     step: 1,
 	orientation: "vertical",
     range: {
-        min: 2,
+        min: 1,
         max: 10
     },
     direction: 'rtl',
@@ -22,7 +22,7 @@ noUiSlider.create(sliderHoriz, {
     start: 4,
     step: 1,
     range: {
-        min: 2,
+        min: 1,
         max: 10
     },
     pips: {
@@ -172,7 +172,7 @@ function getData(method, cluster_num) {
   });
 }
 
-colors = ['rgba(95, 75, 182, 100)','rgba(13, 50, 77, 100)','rgba(168, 224, 255, 100)','rgba(84, 122, 165, 100)','rgba(247, 111, 142, 100)']
+colors = ['rgba(95, 75, 182, 100)','rgba(13, 50, 77, 100)','rgba(168, 224, 255, 100)','rgba(84, 122, 165, 100)','rgba(247, 111, 142, 100)', 'rgba(85, 40, 111,100)', 'rgba(0,72,124,100)']
 
 function refactorData(data, cluster_num) {
   clusters = data.clusters;
