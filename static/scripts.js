@@ -64,6 +64,8 @@ function resizeApplicationControls() {
 	}
 }
 
+
+
 function updateLegend(chart) {
     $legendContainer = $('#legendContainer');
     $legendContainer.empty();
@@ -73,7 +75,11 @@ function updateLegend(chart) {
 window.onload = function() {
 	getData('kmeans', 3);
 	resizeApplicationControls();
+	Run();
 };
+
+
+
 
 $('.info-button').click(function(event) {
 	div_to_show = $(this).attr("show_div")
@@ -90,6 +96,11 @@ function closeInfo() {
 $('.info i').click(function() {
 	closeInfo()
 })
+
+$('select').on('change', function() {
+	updateVarName()
+});
+
 
 
 $(window).resize(function() {
