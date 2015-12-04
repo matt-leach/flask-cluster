@@ -71,6 +71,7 @@ function updateLegend(chart) {
 }
 
 window.onload = function() {
+  Run();
 	getData('kmeans', 3);
 	resizeApplicationControls();
 };
@@ -120,8 +121,9 @@ function uploadFile(csv_file) {
 		contentType: false,
 		type: 'POST',
 		success: function(data){
-			closeInfo()
-    	}	
+      updateVars(data.names);
+			closeInfo();
+    	}
   	});
 }
 
@@ -144,7 +146,7 @@ function refactorData(data, cluster_num) {
     data = [];
     for (jj = 0; jj <= clusters[cluster_num].length; jj++ ) {
       if (clusters[cluster_num][jj] == c) {
-        data.push({x: Data["Sodium"][jj], y: Data["Calories"][jj], name: 'a_point'});
+        data.push({x: Data[$("#var1-selector").val()][jj], y: Data[$("#var2-selector").val()][jj], name: 'a_point'});
       }
     }
     cluster_dict = {name: 'Cluster '+c, color: randomColor(), data: data, marker: {symbol: 'circle'}};

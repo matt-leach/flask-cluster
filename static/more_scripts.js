@@ -1,6 +1,6 @@
 function Run() {
 	$.post('data', {'builtin': 'cereal'}, function(data) {
-    updateVars(data.names)
+    updateVars(data.names);
   });
 };
 

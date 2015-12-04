@@ -2,10 +2,11 @@ from app import app
 import settings
 from data import convert_csv, convert_str
 
-from flask import render_template, jsonify, request, session
+from flask import render_template, jsonify, request
 import pandas as pd
 import numpy as np
 import json
+import shelve
 
 
 @app.route('/')
@@ -15,7 +16,7 @@ def home():
 
 @app.route('/cluster')
 def cluster():
-    session['data'] = None
+    session = shelve.open(settings.SHELVE_DB)
     try:
         method_name = request.args.get('method')
         method = settings.CLUSTER_METHODS[method_name]
@@ -39,20 +40,23 @@ def cluster():
         X, names = convert_csv(settings.DEFAULT_DATA)
         session['data'] = X.to_json()  # Store in session as json
         session['names'] = names.tolist()
-        print session['names']
+
     else:
         X = pd.read_json(session['data'])
+        print session['names']
     cluster_vals = method(X, num_clusters)
 
     # TODO: check numpy array and cast to list if needed
     data = {'clusters': {num_clusters: cluster_vals.tolist()}}
     if return_X_data:
         data['variables'] = {var: X[var].tolist() for var in X}
+    session.close()
     return jsonify(data)
 
 
 @app.route('/data', methods=['POST'])
 def load_data():
+    session = shelve.open(settings.SHELVE_DB)
     try:
         file_name = dict(request.form)['builtin'][0]
     except Exception as e:
@@ -70,5 +74,7 @@ def load_data():
         data, names = convert_str(dict(request.files)['file'][0])
         session['data'] = data.to_json()
         session['names'] = names.tolist()
-
-    return jsonify({'names': session['names']})
+    names = session['names']
+    print names
+    session.close()
+    return jsonify({'names': names})

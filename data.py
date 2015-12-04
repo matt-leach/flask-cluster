@@ -13,5 +13,6 @@ def convert_csv(filename):
 
 def convert_str(data_str):
     data = pd.read_csv(data_str)
-    names = data[data.columns[0]]
-    return data._get_numeric_data(), names
+    # names = data[data.columns[0]]
+    data = data._get_numeric_data()
+    return data, data.columns.values

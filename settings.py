@@ -6,3 +6,5 @@ CLUSTER_METHODS = {'pca': pca,
                    'spectral': spectral}
 
 DEFAULT_DATA = 'data/cereal.csv'
+
+SHELVE_DB = 'data/shelve.db'

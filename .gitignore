@@ -1,3 +1,4 @@
 secret.py
 *.pyc
 .idea
+data/shelve.db
