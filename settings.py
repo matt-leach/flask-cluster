@@ -1,7 +1,6 @@
-from clustering import pca, kmeans, hierarchical, spectral
+from clustering import  kmeans, hierarchical, spectral
 
-CLUSTER_METHODS = {'pca': pca,
-                   'kmeans': kmeans,
+CLUSTER_METHODS = {'kmeans': kmeans,
                    'hierarchical': hierarchical,
                    'spectral': spectral}
 

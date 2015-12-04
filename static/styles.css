@@ -178,6 +178,22 @@ p {
 	border-radius: 5px;
 }
 
+.info h2 {
+	font-size: 1.5em;
+	margin-bottom: .5em;
+}
+
+.info ul {
+	margin-left: 2.5em;
+}
+
+.info li {
+	list-style: square;
+	font-size: 1.2em;
+	margin-bottom: .5em;
+	
+}
+
 .info i {
 	position: absolute;
 	top:1em;
