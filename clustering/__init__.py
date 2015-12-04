@@ -1,23 +1,12 @@
 
 from sklearn.cluster import KMeans
-from sklearn import decomposition
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.cluster import SpectralClustering
 from sklearn import preprocessing
 
-#for testing below:
-#import pandas as pd
-#testframe = pd.read_csv('data/cereal.csv')
-#X = testframe[testframe.keys()[3:9]]
-
-
-def pca(X, num_clusters):
-    '''
-    Principal Component Analysis on X
-    Returns numpy array of cluster groups
-    '''
-    return []
-
+# 3 functions for running clustering
+# Input X should be a Pandas dataframe
+# X must be all numerical variables, no factors or strings
 
 def kmeans(X, num_clusters):
     '''
@@ -27,7 +16,6 @@ def kmeans(X, num_clusters):
     model = KMeans(n_clusters=num_clusters)
     cleanX = preprocessing.scale(X.as_matrix())
     model.fit(cleanX)
-
     return model.labels_
 
 
@@ -39,7 +27,6 @@ def hierarchical(X, num_clusters):
     model = AgglomerativeClustering(n_clusters=num_clusters)
     cleanX = preprocessing.scale(X.as_matrix())
     model.fit(cleanX)
-
     return model.labels_
 
 
@@ -51,5 +38,4 @@ def spectral(X, num_clusters):
     model = SpectralClustering(n_clusters=num_clusters)
     cleanX = preprocessing.scale(X.as_matrix())
     model.fit(cleanX)
-
     return model.labels_
