@@ -39,15 +39,15 @@ def cluster():
     if not session.get('data'):
         X, names = convert_csv(settings.DEFAULT_DATA)
         session['data'] = X.to_json()  # Store in session as json
-        session['names'] = names.tolist()
+        session['names'] = names
 
     else:
         X = pd.read_json(session['data'])
-        print session['names']
     cluster_vals = method(X, num_clusters)
 
     # TODO: check numpy array and cast to list if needed
-    data = {'clusters': {num_clusters: cluster_vals.tolist()}}
+    data = {'clusters': {num_clusters: cluster_vals.tolist()},
+            'names': session['names']}
     if return_X_data:
         data['variables'] = {var: X[var].tolist() for var in X}
     session.close()
@@ -66,15 +66,14 @@ def load_data():
         try:
             data, names = convert_csv('data/{}.csv'.format(file_name))
             session['data'] = data.to_json()
-            session['names'] = names.tolist()
+            session['names'] = names
         except IOError:
             return jsonify({'error': "No built in data file '{}'.".format(file_name)})
     else:
         # TODO: check works with javascript shizzle
         data, names = convert_str(dict(request.files)['file'][0])
         session['data'] = data.to_json()
-        session['names'] = names.tolist()
-    names = session['names']
-    print names
+        session['names'] = names
+    vars = data.columns.values
     session.close()
-    return jsonify({'names': names})
+    return jsonify({'names': vars.tolist()})
