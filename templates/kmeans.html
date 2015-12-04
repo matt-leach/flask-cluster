@@ -1,9 +1,6 @@
-spectral
-heirarchical
+#note: for all 3, you need to put in special code for what K is under "number of clusters"
 
-
-#clustering
-#note, in Number of Cluster: you need to put some pointer that fills it in with the K chosen...
+#kmeans
 
 <p>K-Means Clustering: a clustering technique which assigns observations to clusters based on distance from the cluster center. Observations are assigned to the cluster whose center is the shortest distance from the observation. Clusters are chosen which minimize the distance from each observation to it's cluster's center</p>
 <p>Algorithm: Start with k random points, treat these as the cluster centers. Assign each observation a cluster. Recompute cluster centers and reassign observations. Repeat until total distance from centers stops changing and record results. Repeat whole process N times, and select result with lowest sum of distances from centres.</p>
@@ -15,18 +12,32 @@ heirarchical
 	<li>Algorithm Parameters</li>
 	<li>Number of Iterations(N): 300</li>
 </ul>
+<p>Notes: K-Means does a good job on isotropic clusters with similar variance. Performs poorly with clusters that have irregular shapes and varying variances. Different measures of distance (Manhattan, Cosine, etc.) and different measures of center (mean, median, etc.) can be used to define relationships.</p>
 
 
 #heirarchical
 
-<p>Agglomerative Heirarchical Clustering: a clustering technique which uses a tree structure to assign clusters. A representational tree is computed where the bottom nodes of the tree are the observations as (treated as single member clusters) and the height of the tree represents distance. At the distance equal to the distance between separate clusters, branches merge and form new clusters.</p>
+<p>Agglomerative Heirarchical Clustering: a clustering technique which uses a tree structure (Dendogram) to assign clusters. A representational tree is computed where the bottom nodes of the tree are the observations as (treated as single member clusters) and the height of the tree represents distance. At the distance equal to the distance between separate clusters, branches merge and form new clusters.</p>
 <p>Algorithm: Once a tree is constructed, clusters can be chosen ad hoc, by cutting branches at fixed levels, through penalized pruning methods, or, if K is fixed beforehand, by moving top down on the tree until there are K clusters.</p>
-<h2>Tree Parameters</h2>
+<h2>Tree Model Parameters</h2>
 <ul>
     <li>Distance Measure: Euclidean</li>
     <li>Linkage Criterion: Ward's Minimum Variance</li>
     <li>Pooling Function: Mean</li>
     <li>Cluster Selection: Top down K selection</li>
+    <li>Number of Clusters: whatever K is</li>
 </ul>
+<p>Notes: Heirarchical clustering can be highly customizable with different linkage criterions (Ward's, Centroid, Maximum, etc.) producing very different results. Distance measure can also be tuned according to context and desire, as well as cluster assignment methods. With the Dendogram, one can also see the process by which the clusters form, providng more insight then other clustering techniques.</p>
 
 #spectral
+
+<p>Spectral Clustering: a clustering technique which uses the laplacian of the similarity matrix to assign clusters.</p>
+<p>Algorithm: Create a similarity matrix of the observations. From the similarity matrix, compute the Laplacian Matrix. Using the Laplacian Matrix, assign clusters to each observation using K-Means clustering.</p>
+<h2>Model Parameters</h2>
+<ul>
+    <li>Similarity Criterion: Gaussian RBF Kernal</li>
+    <li>Labeling Technique: K-Means</li>
+    <li>Number of Iterations(for K Means):10</li>
+    <li>Number of Clusters: whatever K is</li>
+</ul>
+<p>Notes: Spectral Clustering is useful for cases where the clusters have irregular shapes and do not congregate uniformly around some centroid. Observations are clustered according to closeness to each other as opposed to closeness to some common point. Similarity criterion can also be tuned according to context and desire.</p>
