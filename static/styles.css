@@ -238,6 +238,11 @@ form input {
 	display: none;
 }
 
+.highcharts-container > svg > text:last-child {
+	display: none;
+}
+
+
 @media (max-width: 768px) {
 	
 	.application {
@@ -255,7 +260,7 @@ form input {
 	}
 	
 	.plotting-area {
-		height: 400px;
+		height: 500px;
 		border-bottom-right-radius: 0px;
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
@@ -286,6 +291,29 @@ form input {
 		left: 40%;
 		top:-.3em;
 		font-size: 1.2em;
+	}
+	
+	#dimmer {
+		opacity: 0 !important;
+	}
+	
+	.info-text-wrapper {
+		position: absolute;
+display: none;
+top: 0;
+left: 0;
+z-index: 1001;
+height: 100%;
+width: 100%;
+margin: 0 auto;
+color: black;
+transform: translateY(0%);
+	}
+	
+	.info {
+		width: 100%;
+		height: 100%;
+		box-sizing: border-box;
 	}
 
 
