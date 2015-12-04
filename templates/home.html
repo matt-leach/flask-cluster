@@ -16,6 +16,21 @@
 						<p>Nulla vitae elit libero, a pharetra augue. Etiam porta sem malesuada magna mollis euismod. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Curabitur blandit tempus porttitor. Donec sed odio dui. Donec sed odio dui.</p>
 				</div>
 			</div>
+			<div class= "info-text-wrapper" id="file-upload-info">
+				<div class="info">
+					<i class="fa fa-close"></i>
+					<h1>Upload new data</h1>
+						<p>Use this tool to upload new data to clustr.fk. The data must be a csv file. First line must be variable names.</p>
+						<form id="submit-file">
+							<div>
+								<input type="file" id="file1"  accept=".csv">
+							</div>
+							<div>
+								<input type="submit" value="Submit">
+							</div>
+						</form>
+				</div>
+			</div>
 			<div class= "info-text-wrapper" id="clustering-info-wrapper">
 				<div class="info">
 					<i class="fa fa-close"></i>
@@ -36,8 +51,7 @@
 							<option>House Price Data</option>
 						</select>
 						<div class="info-wrapper">
-							<input type="file" id="file1" style="display:none">
-							<i class="fa fa-plus-circle add-data-button" id=""></i>
+							<i class="fa fa-plus-circle info-button" show_div="#file-upload-info" id=""></i>
 						</div>
 					</div>
 					<div class="selector-wrapper clearfix">

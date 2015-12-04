@@ -82,9 +82,13 @@ $('.info-button').click(function(event) {
 	$("#dimmer").fadeIn()
 })
 
-$('.info i').click(function() {
+function closeInfo() {
 	$('.info-text-wrapper').fadeOut()
 	$("#dimmer").fadeOut()
+}
+
+$('.info i').click(function() {
+	closeInfo()
 })
 
 
@@ -93,22 +97,34 @@ $(window).resize(function() {
 })
 
 
+$('#submit-file').submit(function() {
+  	var csv_file = document.getElementById("file1").files[0]
+  	var exts = ['csv'];
+  	if (csv_file['type'] == "text/csv") {
+	  	uploadFile(csv_file)
+  	} else {
+	  	alert("Wrong file type. Please upload a valid CSV")
+  	}
+  	return false;
+});
 
-$('.add-data-button').click(function(event) {
-  $("#file1").click();
-  var fd = new FormData();
-  fd.append( 'file', document.getElementById("file1").files[0] );
-  $.ajax({
-    url: 'data',
-    data: fd,
-    processData: false,
-    contentType: false,
-    type: 'POST',
-    success: function(data){
-      alert(data);
-    }
-  });
-})
+
+
+function uploadFile(csv_file) {
+	var fd = new FormData();
+	fd.append( 'file', csv_file );
+	$.ajax({
+    	url: 'data',
+		data: fd,
+		processData: false,
+		contentType: false,
+		type: 'POST',
+		success: function(data){
+			closeInfo()
+    	}	
+  	});
+}
+
 
 
 function getData(method, cluster_num) {
@@ -175,9 +191,6 @@ function plotData(bubbleChartData){
               text: 'Variable 2'
           }
       },
-    legend: {
-        enabled: false
-    },
       plotOptions: {
           scatter: {
               marker: {
