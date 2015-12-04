@@ -96,6 +96,18 @@ $(window).resize(function() {
 
 $('.add-data-button').click(function(event) {
   $("#file1").click();
+  var fd = new FormData();
+  fd.append( 'file', document.getElementById("file1").files[0] );
+  $.ajax({
+    url: 'data',
+    data: fd,
+    processData: false,
+    contentType: false,
+    type: 'POST',
+    success: function(data){
+      alert(data);
+    }
+  });
 })
 
 
