@@ -139,12 +139,32 @@ function uploadFile(csv_file) {
   	});
 }
 
+$('#method-selector').change(function() {
+	getData($(this).val(), parseInt(sliderVert.noUiSlider.get()))
+})
+
+
+sliderVert.noUiSlider.on('change', function( values, handle){
+	method = $('#method-selector').val()
+	console.log(method)
+	console.log(parseInt(values[handle]))
+	getData(method, parseInt(values[handle]))
+});
+
+sliderHoriz.noUiSlider.on('change', function( values, handle){
+	method = $('#method-selector').val()
+	console.log(method)
+	console.log(parseInt(values[handle]))
+	getData(method, parseInt(values[handle]))
+});
+
 
 
 function getData(method, cluster_num) {
   data = 1
   $.get( "cluster?method="+method+"&clusters="+cluster_num+"&data="+data, function(response) {
     if (response.error) { return }  // Error
+    console.log(response)
     refactorData(response, cluster_num);
   });
 }
