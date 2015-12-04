@@ -15,7 +15,7 @@ def home():
 
 @app.route('/cluster')
 def cluster():
-    print session['data']
+    session['data'] = None
     try:
         method_name = request.args.get('method')
         method = settings.CLUSTER_METHODS[method_name]

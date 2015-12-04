@@ -128,7 +128,7 @@ function refactorData(data, cluster_num) {
     data = [];
     for (jj = 0; jj <= clusters[cluster_num].length; jj++ ) {
       if (clusters[cluster_num][jj] == c) {
-        data.push({x: Data["var1"][jj], y: Data["var2"][jj], name: 'a_point'});
+        data.push({x: Data["Sodium"][jj], y: Data["Calories"][jj], name: 'a_point'});
       }
     }
     cluster_dict = {name: 'Cluster '+c, color: randomColor(), data: data, marker: {symbol: 'circle'}};
