@@ -36,8 +36,10 @@ def cluster():
 
     # Get data - either from session or from DEFAULT_DATA location
     if not session.get('data'):
-        X = convert_csv(settings.DEFAULT_DATA)
+        X, names = convert_csv(settings.DEFAULT_DATA)
         session['data'] = X.to_json()  # Store in session as json
+        session['names'] = names.tolist()
+        print session['names']
     else:
         X = pd.read_json(session['data'])
     cluster_vals = method(X, num_clusters)
@@ -58,10 +60,15 @@ def load_data():
         file_name = None
     if file_name:
         try:
-            session['data'] = convert_csv('data/{}.csv'.format(file_name)).to_json()
+            data, names = convert_csv('data/{}.csv'.format(file_name))
+            session['data'] = data.to_json()
+            session['names'] = names.tolist()
         except IOError:
             return jsonify({'error': "No built in data file '{}'.".format(file_name)})
     else:
         # TODO: check works with javascript shizzle
-        session['data'] = convert_str(dict(request.files)['file'][0]).to_json()
-    return ""
+        data, names = convert_str(dict(request.files)['file'][0])
+        session['data'] = data.to_json()
+        session['names'] = names.tolist()
+
+    return jsonify({'names': session['names']})
