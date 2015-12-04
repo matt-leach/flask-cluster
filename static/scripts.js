@@ -72,7 +72,7 @@ function updateLegend(chart) {
 
 window.onload = function() {
   Run();
-	getData('kmeans', 3);
+	getData('kmeans', 6);
 	resizeApplicationControls();
 };
 
@@ -122,6 +122,7 @@ function uploadFile(csv_file) {
 		type: 'POST',
 		success: function(data){
       updateVars(data.names);
+      getData('kmeans', 2);
 			closeInfo();
     	}
   	});
@@ -181,7 +182,7 @@ function plotData(bubbleChartData){
 	      tickColor: '#eee',
           title: {
               enabled: true,
-              text: 'Variable 1'
+              text: $("#var1-selector").val()
           },
           startOnTick: true,
           endOnTick: true,
@@ -191,7 +192,7 @@ function plotData(bubbleChartData){
 	      lineColor: '#333',
 	      gridLineColor: '#eee',
           title: {
-              text: 'Variable 2'
+              text: $("#var2-selector").val()
           }
       },
       plotOptions: {

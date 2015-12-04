@@ -60,7 +60,6 @@ def load_data():
     try:
         file_name = dict(request.form)['builtin'][0]
     except Exception as e:
-        print e
         file_name = None
     if file_name:
         try:
