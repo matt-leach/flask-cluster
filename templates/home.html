@@ -57,7 +57,7 @@
 					<div class="selector-wrapper clearfix">
 						<select id="method-selector">
 							{% for method in methods %}
-								<option>{{method}}</option>
+								<option value="{{method.value}}">{{method.name}}</option>
 							{% endfor %}
 						</select>
 						<div class="info-wrapper">

@@ -7,7 +7,7 @@ noUiSlider.create(sliderVert, {
     step: 1,
 	orientation: "vertical",
     range: {
-        min: 0,
+        min: 2,
         max: 10
     },
     direction: 'rtl',
@@ -22,7 +22,7 @@ noUiSlider.create(sliderHoriz, {
     start: 4,
     step: 1,
     range: {
-        min: 0,
+        min: 2,
         max: 10
     },
     pips: {
@@ -132,10 +132,10 @@ function uploadFile(csv_file) {
 		contentType: false,
 		type: 'POST',
 		success: function(data){
-      updateVars(data.names);
-      getData('kmeans', 2);
-			closeInfo();
-    	}
+			updateVars(data.names);
+			getData('kmeans', 2);
+				closeInfo();
+	    	}
   	});
 }
 
