@@ -8,12 +8,12 @@ noUiSlider.create(sliderVert, {
 	orientation: "vertical",
     range: {
         min: 0,
-        max: 50
+        max: 10
     },
     direction: 'rtl',
     pips: {
 		mode: 'range',
-		density: 1
+		density: 10
     }
 });
 
@@ -23,11 +23,11 @@ noUiSlider.create(sliderHoriz, {
     step: 1,
     range: {
         min: 0,
-        max: 50
+        max: 10
     },
     pips: {
 		mode: 'range',
-		density: 1
+		density: 10
     }
 });
 
@@ -145,11 +145,16 @@ function plotData(bubbleChartData){
           type: 'scatter',
           zoomType: 'xy',
           spacingTop: 0,
-          spacingBottom: 0,
+          spacingBottom: 5,
           spacingLeft: 0,
           style: {
           fontFamily: 'Proxima Nova'
         }
+      },
+      navigation: {
+            buttonOptions: {
+                enabled: false
+            }
       },
       title: { text: 'NBA Data' },
       xAxis: {
@@ -170,6 +175,9 @@ function plotData(bubbleChartData){
               text: 'Variable 2'
           }
       },
+    legend: {
+        enabled: false
+    },
       plotOptions: {
           scatter: {
               marker: {
