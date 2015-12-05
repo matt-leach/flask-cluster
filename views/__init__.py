@@ -11,7 +11,10 @@ import shelve
 
 @app.route('/')
 def home():
-    return render_template('home.html', methods=[{'value':'spectral', 'name': 'Spectral'}, {'name':'K-Means','value': 'kmeans'}, {'name':'Hierarchical', 'value': 'hierarchical'}])
+    return render_template('home.html', methods=[{'value': 'spectral', 'name': 'Spectral'},
+                                                 {'name': 'K-Means', 'value': 'kmeans'},
+                                                 {'name': 'Hierarchical', 'value': 'hierarchical'}])
+
 
 @app.route('/cluster')
 def cluster():

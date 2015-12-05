@@ -1,6 +1,11 @@
 var sliderVert = document.getElementById('slider-handle-vert');
 var sliderHoriz = document.getElementById('slider-handle-horiz');
 
+var clusters;
+var Data;
+var names;
+var cluster_num;
+
 noUiSlider.create(sliderVert, {
 	animate: false,
     start: 4,
