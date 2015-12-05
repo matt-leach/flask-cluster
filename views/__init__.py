@@ -7,6 +7,7 @@ from flask import render_template, jsonify, request, session
 import pandas as pd
 import numpy as np
 import json
+import uuid
 
 
 @app.route('/')
@@ -70,7 +71,7 @@ def load_data():
     else:
         csv_file = dict(request.files)['file'][0]
         file_name = csv_file.filename
-
+        file_name = '{}-{}'.format(str(uuid.uuid4()), file_name)
         # save the csv to data dir
         csv_file.save('data/{}'.format(file_name))
 
