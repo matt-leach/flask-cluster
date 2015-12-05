@@ -74,7 +74,7 @@ function updateLegend(chart) {
 
 window.onload = function() {
 	current_clusters = sliderVert.noUiSlider.get()
-	
+
   Run();
   getData('kmeans', current_clusters);
   resizeApplicationControls();
@@ -85,9 +85,9 @@ window.onload = function() {
 
 
 $('.info-button').click(function(event) {
+	method = $('#method-selector').val();
 	div_to_show = $(this).attr("show_div")
-	console.log(div_to_show)
-	$(div_to_show).fadeIn()
+	$("#"+method+"-info").fadeIn()
 	$("#dimmer").fadeIn()
 })
 

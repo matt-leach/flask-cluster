@@ -23,22 +23,22 @@
 						</form>
 				</div>
 			</div>
-			<div class= "info-text-wrapper" id="clustering-info-wrapper">
+			<div class= "info-text-wrapper" id="kmeans-info">
 				<div class="info">
 					<i class="fa fa-close"></i>
-					<h1>K-Means Clustering</h1>
-					<p>K-Means Clustering is a clustering technique which assigns observations to clusters based on distance from the cluster center. Observations are assigned to the cluster whose center is the shortest distance from the observation. Clusters are chosen which minimize the distance from each observation to it's cluster's center</p>
-					<p>Algorithm: Start with k random points, treat these as the cluster centers. Assign each observation a cluster. Recompute cluster centers and reassign observations. Repeat until total distance from centers stops changing and record results. Repeat whole process N times, and select result with lowest sum of distances from centres.</p>
-					<h2>Model Parameters</h2>
-					<ul>
-						<li>Distance Measure: Euclidean</li>
-						<li>Center: Mean</li>
-						<li>Number of Clusters: <span class="no-of-clusters"></span></li>
-					</ul>
-					<h2>Algorithm Parameters</h2>
-					<ul>
-						<li>Number of Iterations (N): 300</li>
-					</ul>
+					{% include 'kmeans.html' %}
+				</div>
+			</div>
+			<div class= "info-text-wrapper" id="spectral-info">
+				<div class="info">
+					<i class="fa fa-close"></i>
+					{% include 'spectral.html' %}
+				</div>
+			</div>
+			<div class= "info-text-wrapper" id="hierarchical-info">
+				<div class="info">
+					<i class="fa fa-close"></i>
+					{% include 'hierarchical.html' %}
 				</div>
 			</div>
 			<div id="dimmer">
