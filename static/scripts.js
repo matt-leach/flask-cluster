@@ -71,11 +71,9 @@ function resizeApplicationControls() {
 
 
 window.onload = function() {
-	current_clusters = sliderVert.noUiSlider.get()
+	current_clusters = parseInt(sliderVert.noUiSlider.get());
 	resizeApplicationControls();
-  Initialize();
-  getData('kmeans', current_clusters);
-  updateClusters(current_clusters)
+  Initialize(current_clusters);
 };
 
 function showInfo() {
@@ -132,24 +130,33 @@ $('#submit-file').submit(function() {
 
 
 function uploadFile(csv_file) {
+	// uploads a file
 	var fd = new FormData();
 	fd.append( 'file', csv_file );
 	$.ajax({
     	url: 'data',
-		data: fd,
-		processData: false,
-		contentType: false,
-		type: 'POST',
-		success: function(data){
-			updateVars(data.names);
-			getData('kmeans', 2);
-				closeInfo();
-	    	}
-  	});
+			data: fd,
+			processData: false,
+			contentType: false,
+			type: 'POST',
+			success: function(data){
+				updateVars(data.variable_names);
+				getData('kmeans', parseInt(sliderVert.noUiSlider.get()));
+					closeInfo();
+		    	}
+	  	});
 }
 
 $('#method-selector').change(function() {
 	getData($(this).val(), parseInt(sliderVert.noUiSlider.get()));
+})
+
+
+$('#dataset-selector').change(function() {
+	$.post('data', {'builtin': $(this).val()}, function(data) {
+    	updateVars(data.variable_names);
+			getData($('#method-selector').val(), parseInt(sliderVert.noUiSlider.get()));
+  	});
 })
 
 

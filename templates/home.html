@@ -48,7 +48,9 @@
 				<div id="selectors">
 					<div class="selector-wrapper clearfix">
 						<select id="dataset-selector">
-							<option>Cereal Data</option>
+							{% for dataset in builtins %}
+								<option value="{{dataset.file}}">{{dataset.name}}</option>
+							{% endfor %}
 						</select>
 						<div class="info-wrapper">
 							<i class="fa fa-plus-circle upload-info-button" id=""></i>
