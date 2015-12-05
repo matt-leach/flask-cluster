@@ -8,5 +8,4 @@ def convert_csv(filename):
         data = pd.read_csv(filename)
     names = data[data.columns[0]]  # names of data points
     data = data._get_numeric_data()
-    print data
     return data, names.tolist()
