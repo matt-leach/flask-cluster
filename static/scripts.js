@@ -1,80 +1,12 @@
-var sliderVert = document.getElementById('slider-handle-vert');
-var sliderHoriz = document.getElementById('slider-handle-horiz');
-
+// Globals
 var clusters;
 var Data;
 var names;
 var cluster_num;
 
-noUiSlider.create(sliderVert, {
-	animate: false,
-    start: 4,
-    step: 1,
-	orientation: "vertical",
-    range: {
-        min: 1,
-        max: 10
-    },
-    direction: 'rtl',
-    pips: {
-		mode: 'range',
-		density: 10
-    }
-});
+var sliderVert = document.getElementById('slider-handle-vert');
+var sliderHoriz = document.getElementById('slider-handle-horiz');
 
-noUiSlider.create(sliderHoriz, {
-	animate: false,
-    start: 4,
-    step: 1,
-    range: {
-        min: 1,
-        max: 10
-    },
-    pips: {
-		mode: 'range',
-		density: 10
-    }
-});
-
-function crossUpdate ( value, slider ) {
-	slider.noUiSlider.set(value);
-}
-
-sliderHoriz.noUiSlider.on('slide', function( values, handle ){
-	sliderVert.noUiSlider.set(values[handle]);
-});
-
-sliderVert.noUiSlider.on('slide', function( values, handle ){
-	sliderHoriz.noUiSlider.set(values[handle]);
-});
-
-
-var randomScalingFactor = function() {
-    return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
-};
-var randomColorFactor = function() {
-    return Math.round(Math.random() * 255);
-};
-var randomColor = function() {
-    return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',.7)';
-};
-
-function resizeApplicationControls() {
-	$('.plotting-area').css('height', $('#canvas').outerHeight() + 80)
-
-	if ($(window).width() > 768) {
-		$('.application-controls').css('height', $('.plotting-area').innerHeight())
-	} else {
-		$('.application-controls').css('height', 'auto')
-	}
-}
-
-
-window.onload = function() {
-	current_clusters = parseInt(sliderVert.noUiSlider.get());
-	resizeApplicationControls();
-  Initialize(current_clusters);
-};
 
 function showInfo() {
 	method = $('#method-selector').val();
@@ -148,31 +80,32 @@ function uploadFile(csv_file) {
 }
 
 $('#method-selector').change(function() {
-	getData($(this).val(), parseInt(sliderVert.noUiSlider.get()));
+	updateClusters();
 })
 
 
 $('#dataset-selector').change(function() {
 	$.post('data', {'builtin': $(this).val()}, function(data) {
     	updateVars(data.variable_names);
-			getData($('#method-selector').val(), parseInt(sliderVert.noUiSlider.get()));
+			updateClusters();
   	});
 })
 
 
-function updateClusters(x) {
-	clusters = parseInt(x);
+function updateClusters() {
+	// Updates clusters
+	clusters = parseInt(sliderVert.noUiSlider.get());
 	method = $('#method-selector').val();
 	$(".no-of-clusters").html(clusters);
 	getData(method, clusters);
 }
 
 sliderVert.noUiSlider.on('change', function( values, handle){
-	updateClusters(values[handle]);
+	updateClusters();
 });
 
 sliderHoriz.noUiSlider.on('change', function( values, handle){
-	updateClusters(values[handle]);
+	updateClusters();
 });
 
 
@@ -195,6 +128,7 @@ colors = ['rgba(95, 75, 182, 100)',
 
 
 function setData(data, cluster_count) {
+	// set globals
 	clusters = data.clusters;
 	Data = data.variables;
 	names = data.names;
@@ -284,3 +218,10 @@ function plotData(bubbleChartData) {
   resizeApplicationControls()
 
 }
+
+
+window.onload = function() {
+	current_clusters = parseInt(sliderVert.noUiSlider.get());
+	resizeApplicationControls();
+  Initialize(current_clusters);
+};
