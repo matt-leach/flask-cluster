@@ -1,4 +1,4 @@
-function Run() {
+function Initialize() {
 	$.post('data', {'builtin': 'cereal'}, function(data) {
     	updateVars(data.names);
   	});

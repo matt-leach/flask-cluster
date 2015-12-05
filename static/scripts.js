@@ -65,43 +65,45 @@ function resizeApplicationControls() {
 }
 
 
-
-function updateLegend(chart) {
-    $legendContainer = $('#legendContainer');
-    $legendContainer.empty();
-    // $legendContainer.append(window.myChart.generateLegend());
-}
-
 window.onload = function() {
 	current_clusters = sliderVert.noUiSlider.get()
-	
-  Run();
+	resizeApplicationControls();
+  Initialize();
   getData('kmeans', current_clusters);
-  resizeApplicationControls();
   updateClusters(current_clusters)
 };
 
+function showInfo() {
+	method = $('#method-selector').val();
+	$("#"+method+"-info").fadeIn();
+	$("#dimmer").fadeIn();
+}
 
-
-
-$('.info-button').click(function(event) {
-	div_to_show = $(this).attr("show_div")
-	console.log(div_to_show)
-	$(div_to_show).fadeIn()
-	$("#dimmer").fadeIn()
-})
+function showUploadInfo() {
+  $("#file-upload-info").fadeIn();
+	$("#dimmer").fadeIn();
+}
 
 function closeInfo() {
-	$('.info-text-wrapper').fadeOut()
-	$("#dimmer").fadeOut()
+	$('.info-text-wrapper').fadeOut();
+	$("#dimmer").fadeOut();
 }
+
+$('.info-button').click(function(event) {
+  showInfo();
+})
+
+$(".upload-info-button").click(function(event) {
+	showUploadInfo();
+})
 
 $('.info i').click(function() {
 	closeInfo()
 })
 
-$('select').on('change', function() {
-	updateVarName()
+$('.var-selector').on('change', function() {
+	updateVarName();
+	refactorAndPlotData();
 });
 
 
@@ -142,43 +144,52 @@ function uploadFile(csv_file) {
 }
 
 $('#method-selector').change(function() {
-	getData($(this).val(), parseInt(sliderVert.noUiSlider.get()))
+	getData($(this).val(), parseInt(sliderVert.noUiSlider.get()));
 })
 
 
 function updateClusters(x) {
-	clusters = parseInt(x)
-	method = $('#method-selector').val()
-	$(".no-of-clusters").html(clusters)
-	getData(method, clusters)
+	clusters = parseInt(x);
+	method = $('#method-selector').val();
+	$(".no-of-clusters").html(clusters);
+	getData(method, clusters);
 }
 
 sliderVert.noUiSlider.on('change', function( values, handle){
-	updateClusters(values[handle])
+	updateClusters(values[handle]);
 });
 
 sliderHoriz.noUiSlider.on('change', function( values, handle){
-	updateClusters(values[handle])
+	updateClusters(values[handle]);
 });
-
 
 
 function getData(method, cluster_num) {
   data = 1
   $.get( "cluster?method="+method+"&clusters="+cluster_num+"&data="+data, function(response) {
     if (response.error) { return }  // Error
-    console.log(response)
-    refactorData(response, cluster_num);
+    setData(response, cluster_num);
+		refactorAndPlotData(cluster_num);
   });
 }
 
-colors = ['rgba(95, 75, 182, 100)','rgba(13, 50, 77, 100)','rgba(168, 224, 255, 100)','rgba(84, 122, 165, 100)','rgba(247, 111, 142, 100)', 'rgba(85, 40, 111,100)', 'rgba(0,72,124,100)']
+colors = ['rgba(95, 75, 182, 100)',
+					'rgba(13, 50, 77, 100)',
+					'rgba(168, 224, 255, 100)',
+					'rgba(84, 122, 165, 100)',
+					'rgba(247, 111, 142, 100)',
+					'rgba(85, 40, 111,100)',
+					'rgba(0,72,124,100)']
 
-function refactorData(data, cluster_num) {
-  clusters = data.clusters;
-  Data = data.variables;  // Global
-  names = data.names;
 
+function setData(data, cluster_count) {
+	clusters = data.clusters;
+	Data = data.variables;
+	names = data.names;
+	cluster_num = cluster_count;
+}
+
+function refactorAndPlotData() {
   chart_data = [];
   for (c = 0; c < cluster_num; c++ ) {
     data = [];
@@ -191,11 +202,10 @@ function refactorData(data, cluster_num) {
     chart_data.push(cluster_dict);
   }
   var bubbleChartData = chart_data;
-  plotData(bubbleChartData)
+  plotData(bubbleChartData);
 }
 
-function plotData(bubbleChartData){
-
+function plotData(bubbleChartData) {
   $('#canvas').highcharts({
       chart: {
           type: 'scatter',
@@ -212,7 +222,7 @@ function plotData(bubbleChartData){
                 enabled: false
             }
       },
-      title: { text: 'NBA Data' },
+      title: { text: '' },
       xAxis: {
 	      lineColor: '#eee',
 	      tickColor: '#eee',
@@ -258,7 +268,6 @@ function plotData(bubbleChartData){
       series: bubbleChartData
   });
 
-  updateLegend(window.myChart)
 
   resizeApplicationControls()
 
