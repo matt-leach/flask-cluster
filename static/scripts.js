@@ -132,6 +132,7 @@ $('#submit-file').submit(function() {
 
 
 function uploadFile(csv_file) {
+	// uploads a file
 	var fd = new FormData();
 	fd.append( 'file', csv_file );
 	$.ajax({
@@ -141,7 +142,7 @@ function uploadFile(csv_file) {
 		contentType: false,
 		type: 'POST',
 		success: function(data){
-			updateVars(data.names);
+			updateVars(data.variable_names);
 			getData('kmeans', 2);
 				closeInfo();
 	    	}

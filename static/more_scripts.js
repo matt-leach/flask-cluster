@@ -1,6 +1,6 @@
 function Initialize() {
-	$.post('data', {'builtin': 'cereal'}, function(data) {
-    	updateVars(data.names);
+	$.post('data', {'builtin': 'cereal.csv'}, function(data) {
+    	updateVars(data.variable_names);
   	});
 };
 
