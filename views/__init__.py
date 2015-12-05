@@ -11,9 +11,12 @@ import json
 
 @app.route('/')
 def home():
-    return render_template('home.html', methods=[{'value': 'spectral', 'name': 'Spectral'},
-                                                 {'name': 'K-Means', 'value': 'kmeans'},
-                                                 {'name': 'Hierarchical', 'value': 'hierarchical'}])
+    return render_template('home.html', methods=[{'name': 'K-Means', 'value': 'kmeans'},
+                                                 {'value': 'spectral', 'name': 'Spectral'},
+                                                 {'name': 'Hierarchical', 'value': 'hierarchical'}],
+                                        builtins=[{'name': 'Cereal Data', 'file': 'cereal.csv'},
+                                                  {'name': 'Ruspini', 'file': 'ruspini.csv'},
+                                                  {'name': 'X Clara', 'file': 'xclara.csv'}])
 
 
 @app.route('/cluster')

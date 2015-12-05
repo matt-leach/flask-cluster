@@ -1,6 +1,8 @@
-function Initialize() {
+function Initialize(currennt_clusters) {
 	$.post('data', {'builtin': 'cereal.csv'}, function(data) {
     	updateVars(data.variable_names);
+			getData($('#method-selector').val(), current_clusters);
+		  updateClusters(current_clusters);
   	});
 };
 
