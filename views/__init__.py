@@ -75,7 +75,7 @@ def load_data():
         data, names = convert_csv('data/{}'.format(file_name))
 
     # update the dataset session var
-    session['dataset'] = csv_file.filename
+    session['dataset'] = file_name
 
     # return data
     return jsonify({'variable_names': data.columns.values.tolist()})
