@@ -75,18 +75,26 @@ window.onload = function() {
 
 function showInfo() {
 	method = $('#method-selector').val();
-	div_to_show = $(this).attr("show_div")
-	$("#"+method+"-info").fadeIn()
-	$("#dimmer").fadeIn()
+	$("#"+method+"-info").fadeIn();
+	$("#dimmer").fadeIn();
+}
+
+function showUploadInfo() {
+  $("#file-upload-info").fadeIn();
+	$("#dimmer").fadeIn();
 }
 
 function closeInfo() {
-	$('.info-text-wrapper').fadeOut()
-	$("#dimmer").fadeOut()
+	$('.info-text-wrapper').fadeOut();
+	$("#dimmer").fadeOut();
 }
 
 $('.info-button').click(function(event) {
   showInfo();
+})
+
+$(".upload-info-button").click(function(event) {
+	showUploadInfo();
 })
 
 $('.info i').click(function() {
@@ -182,7 +190,6 @@ function setData(data, cluster_count) {
 }
 
 function refactorAndPlotData() {
-	alert(clusters[cluster_num]);
   chart_data = [];
   for (c = 0; c < cluster_num; c++ ) {
     data = [];
