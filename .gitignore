@@ -2,3 +2,4 @@ secret.py
 *.pyc
 .idea
 data/shelve.db
+Code_Along_KMeans-checkpoint.ipynb
