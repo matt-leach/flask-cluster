@@ -1,21 +1,27 @@
 from app import app
 import settings
-from data import convert_csv, convert_str
+from data import convert_csv
 
-from flask import render_template, jsonify, request
+from flask import render_template, jsonify, request, session
+
 import pandas as pd
 import numpy as np
 import json
-import shelve
+import uuid
 
 
 @app.route('/')
 def home():
-    return render_template('home.html', methods=[{'value':'spectral', 'name': 'Spectral'}, {'name':'K-Means','value': 'kmeans'}, {'name':'Hierarchical', 'value': 'hierarchical'}])
+    return render_template('home.html', methods=[{'name': 'K-Means', 'value': 'kmeans'},
+                                                 {'value': 'spectral', 'name': 'Spectral'},
+                                                 {'name': 'Hierarchical', 'value': 'hierarchical'}],
+                                        builtins=[{'name': 'Cereal Data', 'file': 'cereal.csv'},
+                                                  {'name': 'Ruspini', 'file': 'ruspini.csv'},
+                                                  {'name': 'X Clara', 'file': 'xclara.csv'}])
+
 
 @app.route('/cluster')
 def cluster():
-    session = shelve.open(settings.SHELVE_DB)
     try:
         method_name = request.args.get('method')
         method = settings.CLUSTER_METHODS[method_name]
@@ -34,44 +40,46 @@ def cluster():
 
     return_X_data = bool(request.args.get('data'))
 
-    # Get data - either from session or from DEFAULT_DATA location
-    if not session.get('data'):
-        X, names = convert_csv(settings.DEFAULT_DATA)
-        session['data'] = X.to_json()  # Store in session as json
-        session['names'] = names
+    # Get dataset - either from session or from DEFAULT_DATASET location
+    dataset = session.get('dataset', settings.DEFAULT_DATASET)
 
-    else:
-        X = pd.read_json(session['data'])
+    # Convert csv to dataframe
+    X, names = convert_csv('data/{}'.format(dataset))
+
     cluster_vals = method(X, num_clusters)
 
     # TODO: check numpy array and cast to list if needed
     data = {'clusters': {num_clusters: cluster_vals.tolist()},
-            'names': session['names']}
+            'names': names}
+
     if return_X_data:
         data['variables'] = {var: X[var].tolist() for var in X}
-    session.close()
     return jsonify(data)
 
 
 @app.route('/data', methods=['POST'])
 def load_data():
-    session = shelve.open(settings.SHELVE_DB)
     try:
         file_name = dict(request.form)['builtin'][0]
     except Exception as e:
         file_name = None
     if file_name:
         try:
-            data, names = convert_csv('data/{}.csv'.format(file_name))
-            session['data'] = data.to_json()
-            session['names'] = names
+            data, names = convert_csv('data/{}'.format(file_name))
         except IOError:
             return jsonify({'error': "No built in data file '{}'.".format(file_name)})
     else:
-        # TODO: check works with javascript shizzle
-        data, names = convert_str(dict(request.files)['file'][0])
-        session['data'] = data.to_json()
-        session['names'] = names
-    vars = data.columns.values
-    session.close()
-    return jsonify({'names': vars.tolist()})
+        csv_file = dict(request.files)['file'][0]
+        file_name = csv_file.filename
+        file_name = '{}-{}'.format(str(uuid.uuid4()), file_name)
+        # save the csv to data dir
+        csv_file.save('data/{}'.format(file_name))
+
+        # then just convert it as usual
+        data, names = convert_csv('data/{}'.format(file_name))
+
+    # update the dataset session var
+    session['dataset'] = file_name
+
+    # return data
+    return jsonify({'variable_names': data.columns.values.tolist()})

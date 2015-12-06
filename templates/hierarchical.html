@@ -1,0 +1,33 @@
+<h1>Agglomerative Heirarchical Clustering</h1>
+<p>
+  A clustering technique which uses a
+  tree structure (Dendogram) to assign clusters.
+  A representational tree is computed where the bottom nodes of the tree are the
+  observations as (treated as single member clusters) and the height of the tree
+  represents distance. At the distance equal to the distance between separate
+  clusters, branches merge and form new clusters.
+</p>
+<h2>Algorithm</h2>
+<p>
+  Once a tree is constructed, clusters can be chosen ad hoc,
+  by cutting branches at fixed levels, through penalized pruning methods, or,
+  if K is fixed beforehand, by moving top down on the tree until there are K
+  clusters.
+</p>
+<h2>Tree Model Parameters</h2>
+<ul>
+    <li>Distance Measure: Euclidean</li>
+    <li>Linkage Criterion: Ward's Minimum Variance</li>
+    <li>Pooling Function: Mean</li>
+    <li>Cluster Selection: Top down K selection</li>
+    <li>Number of Clusters: <span class="no-of-clusters"></span></li>
+</ul>
+<h2>Notes</h2>
+<p>
+  Hierarchical clustering can be highly customizable with different
+  linkage criterions (Ward's, Centroid, Maximum, etc.) producing very different
+  results. Distance measure can also be tuned according to context and desire,
+  as well as cluster assignment methods. With the Dendogram, one can also see
+  the process by which the clusters form, providng more insight than other
+  clustering techniques.
+</p>

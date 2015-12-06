@@ -1,0 +1,25 @@
+<h1>Spectral Clustering</h1>
+<p>
+  A clustering technique which uses the laplacian of the
+  similarity matrix to assign clusters.</p>
+<h2>Algorithm</h2>
+<p>
+  Create a similarity matrix of the observations.
+  From the similarity matrix, compute the Laplacian Matrix. Using the Laplacian
+  Matrix, assign clusters to each observation using K-Means clustering.
+</p>
+<h2>Model Parameters</h2>
+<ul>
+    <li>Similarity Criterion: Gaussian RBF Kernal</li>
+    <li>Labeling Technique: K-Means</li>
+    <li>Number of Iterations(for K Means):10</li>
+    <li>Number of Clusters: <span class="no-of-clusters"></span></li>
+</ul>
+<h2>Notes</h2>
+<p>
+  Spectral Clustering is useful for cases where the clusters have
+  irregular shapes and do not congregate uniformly around some centroid.
+  Observations are clustered according to closeness to each other as opposed to
+  closeness to some common point. Similarity criterion can also be tuned
+  according to context and desire.
+</p>

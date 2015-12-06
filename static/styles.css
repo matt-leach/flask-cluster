@@ -1,7 +1,7 @@
 body {
 	font-size: 10px;
 	background-color: #eee;
-	font-family: "Proxima Nova" sans-serif;
+	font-family: "proxima-nova" sans-serif;
 }
 
 /* fonts and headings */
@@ -104,7 +104,7 @@ p {
 	left: -1em;
 	top:45%;
 /* 	transform: translateY(-50%); */
-	
+
 }
 
 #plot-x-label {
@@ -127,7 +127,7 @@ p {
 }
 
 .selector-wrapper {
-	white-space: nowrap; 
+	white-space: nowrap;
 }
 
 .selector-wrapper select {
@@ -192,7 +192,7 @@ p {
 	list-style: square;
 	font-size: 1.2em;
 	margin-bottom: .5em;
-	
+
 }
 
 .info i {
@@ -213,7 +213,7 @@ p {
 	line-height: 1.5;
 }
 
-.info-button {
+.info-button, .upload-info-button {
 	cursor: pointer;
 }
 
@@ -261,35 +261,35 @@ form input {
 
 
 @media (max-width: 768px) {
-	
+
 	.application {
 		display: flex;
 		flex-direction: column-reverse;
 	}
-	
+
 	.application-controls {
 		width:100%;
 		border-top-right-radius: 0px;
 		border-bottom-right-radius: 5px;
 		border-bottom-left-radius: 5px;
 			display: flex;
-		
+
 	}
-	
+
 	.plotting-area {
 		height: 500px;
 		border-bottom-right-radius: 0px;
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
 	}
-	
+
 	#slider-container {
 		display: block;
 		margin-top: 0;
 		width: 100%;
 		padding: 2em;
 	}
-	
+
 	#slider-handle-vert{
 		display: none;
 	}
@@ -297,7 +297,7 @@ form input {
 	#slider-handle-horiz {
 		display: block;
 	}
-	
+
 	#selectors {
 		width: 20em;
 		margin-right: 1.5em;
@@ -309,11 +309,11 @@ form input {
 		top:-.3em;
 		font-size: 1.2em;
 	}
-	
+
 	#dimmer {
 		opacity: 0 !important;
 	}
-	
+
 	.info-text-wrapper {
 		position: absolute;
 display: none;
@@ -326,7 +326,7 @@ margin: 0 auto;
 color: black;
 transform: translateY(0%);
 	}
-	
+
 	.info {
 		width: 100%;
 		height: 100%;
@@ -339,7 +339,7 @@ transform: translateY(0%);
 .site-footer, .page-wrap:after {
 	margin: 0;
 	padding: 0;
-	height: 5em; 
+	height: 5em;
 }
 
 .site-footer {
@@ -357,13 +357,13 @@ transform: translateY(0%);
 
 /* other */
 
-	
+
 
 	/* plot */
-	
+
 	.highcharts-contextmenu {
 	}
-	
+
 	.highcharts-contextmenu > div {
 		box-shadow: none !important;
 		-webkit-box-shadow:none !important;
@@ -372,11 +372,11 @@ transform: translateY(0%);
 		margin-top: 5px !important;
 		padding: 0 !important;
 	}
-	
+
 	.highcharts-contextmenu > div > div {
 		padding:1em !important;
 	}
-	
+
 	.highcharts-contextmenu > div > div:hover {
 		background: #eee !important;
 		color: #000 !important;
@@ -387,7 +387,7 @@ transform: translateY(0%);
 	}
 
 	/* blinking cursor */
-		
+
 		.blinking-cursor {
 		  font-weight: 500;
 		  font-size: .9em;
@@ -397,7 +397,7 @@ transform: translateY(0%);
 		  margin-left: .2em;
 		  animation: 1s blink step-end infinite;
 		}
-		
+
 		@keyframes "blink" {
 		  from, to {
 		    color: transparent;
@@ -406,6 +406,3 @@ transform: translateY(0%);
 		    color: black;
 		  }
 		}
-		
-		
-
