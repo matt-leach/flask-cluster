@@ -35,7 +35,8 @@ def spectral(X, num_clusters):
     Spectral Clustering on X for response y
     Returns array of cluster groups
     '''
-    model = SpectralClustering(n_clusters=num_clusters, eigen_solver= 'arpack', affinity= 'nearest_neighbors')
+    model = SpectralClustering(n_clusters=num_clusters, eigen_solver= 'arpack', affinity= 'nearest_neighbors',
+                               n_neighbors= 4, assign_labels= 'discretize')
     cleanX = preprocessing.scale(X.as_matrix())
     model.fit(cleanX)
     return model.labels_
