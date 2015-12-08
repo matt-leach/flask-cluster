@@ -3,7 +3,27 @@
 {% block content %}
 
 <div class="page-wrap">
+	<div class= "info-text-wrapper" id="kmeans-info">
+				<div class="info">
+					<i class="fa fa-close"></i>
+					{% include 'kmeans.html' %}
+				</div>
+			</div>
+			<div class= "info-text-wrapper" id="spectral-info">
+				<div class="info">
+					<i class="fa fa-close"></i>
+					{% include 'spectral.html' %}
+				</div>
+			</div>
+			<div class= "info-text-wrapper" id="hierarchical-info">
+				<div class="info">
+					<i class="fa fa-close"></i>
+					{% include 'hierarchical.html' %}
+				</div>
+			</div>
+
 	<div class="content" id="application-frame">
+		
 		<div class="header">
 			<h1><span id="arrow">></span> welcome to <span id="title">clustr.fk</span><span class="blinking-cursor">|</span></h1>
 		</div>
@@ -21,24 +41,6 @@
 								<input type="submit" value="Submit">
 							</div>
 						</form>
-				</div>
-			</div>
-			<div class= "info-text-wrapper" id="kmeans-info">
-				<div class="info">
-					<i class="fa fa-close"></i>
-					{% include 'kmeans.html' %}
-				</div>
-			</div>
-			<div class= "info-text-wrapper" id="spectral-info">
-				<div class="info">
-					<i class="fa fa-close"></i>
-					{% include 'spectral.html' %}
-				</div>
-			</div>
-			<div class= "info-text-wrapper" id="hierarchical-info">
-				<div class="info">
-					<i class="fa fa-close"></i>
-					{% include 'hierarchical.html' %}
 				</div>
 			</div>
 			<div id="dimmer">
